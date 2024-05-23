@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('direccion', 50)->nullable();
             $table->string('telefono', 10)->nullable();
             $table->string('formacion', 50)->nullable();
+            $table->string('imagen', 60)->nullable();
             $table->timestamps();
         });
     }

@@ -13,7 +13,6 @@ class DocenteController extends Controller
     public function index()
     {
         $teacher = Docente::all();
-        //return $course;
         return view('docentes.index', compact('teacher'));
     }
 
@@ -37,6 +36,11 @@ class DocenteController extends Controller
         $teacher->telefono = $request->input('telefono');
         $teacher->formacion = $request->input('formacion');
 
+
+        if ($request->hasFile('imagen')){ //si desde ese campo viene un archivo hacer:
+            $teacher->imagen = $request->file('imagen')->store('public/imagenes');
+        }
+
         $teacher->save();
         return 'Se creo el instructor con exito';
     }
@@ -46,7 +50,8 @@ class DocenteController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $teacher = Docente::find($id);
+        return view('docentes.show', compact('teacher'));
     }
 
     /**
@@ -54,7 +59,8 @@ class DocenteController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $teacher = Docente::find($id);
+        return view('docentes.edit',compact('teacher'));
     }
 
     /**
@@ -62,7 +68,13 @@ class DocenteController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $teacher = Docente::find($id);
+        $teacher->fill($request->except('imagen'));
+        if ($request->hasFile('imagen')){ //si desde ese campo viene un archivo hacer:
+            $teacher->imagen = $request->file('imagen')->store('public/imagenes');
+            $teacher->save();
+            return 'Docente actualizado';
+        }
     }
 
     /**
