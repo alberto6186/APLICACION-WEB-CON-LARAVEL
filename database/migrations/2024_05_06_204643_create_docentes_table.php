@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('docentes', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
-            $table->string('direccion', 50)->nullable();
+            $table->string('nombre', 50)->nullable();
+            $table->string('direccion', 70)->nullable();
             $table->string('telefono', 10)->nullable();
-            $table->string('formacion', 50)->nullable();
+            $table->string('formacion', 400)->nullable();
             $table->string('imagen', 60)->nullable();
             $table->timestamps();
         });

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Curso;
+use Illuminate\Support\Facades\Hash;
 
 class CursoController extends Controller
 {
@@ -13,7 +14,7 @@ class CursoController extends Controller
     public function index()
     {
         $course = Curso::all();
-        return view('cursos.index', compact('course'));
+        return view('registros.index', compact('course'));
     }
 
     /**
@@ -21,8 +22,13 @@ class CursoController extends Controller
      */
     public function create()
     {
-        return view('cursos.create');
+        return view('registros.create');
     }
+    public function login()
+    {
+        return view('registros.login');
+    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -31,17 +37,14 @@ class CursoController extends Controller
     {
         $course = new Curso();
         $course->nombre = $request->input('nombre');
-        $course->descripcion = $request->input('descripcion');
-        $course->duracion = $request->input('duracion');
-        $course->estado = $request->input('estado');
-
-        if ($request->hasFile('imagen')){ //si desde ese campo viene un archivo hacer:
-            $course->imagen = $request->file('imagen')->store('public/imagenes');
-        }
+        $course->apellidos = $request->input('apellidos');
+        $course->email = $request->input('email');
+        $course->password = Hash::make($request['password']);
 
         $course->save();
-        return 'Se realizo un curso y se guardo exitosamente';
+        return redirect()->route('registros.index')->with('status', 'create');
     }
+
 
     /**
      * Display the specified resource.
@@ -49,7 +52,7 @@ class CursoController extends Controller
     public function show(string $id)
     {
         $course = Curso::find($id);
-        return view('cursos.show', compact('course'));
+        return view('registros.show', compact('course'));
     }
 
     /**
@@ -58,7 +61,7 @@ class CursoController extends Controller
     public function edit(string $id)
     {
         $course = Curso::find($id);
-        return view('cursos.edit',compact('course'));
+        return view('registros.edit',compact('course'));
     }
 
     /**
@@ -80,6 +83,7 @@ class CursoController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+
     }
 }
+

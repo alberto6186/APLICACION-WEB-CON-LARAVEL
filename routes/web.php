@@ -5,14 +5,16 @@ use App\Http\Controllers\DocenteController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SaludoController;
 
+
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/saludo', [SaludoController::class, 'saludito']);
+Route::resource('/registros', CursoController::class);
 
-Route::resource('/cursos', CursoController::class);
+Route::resource('/aseguradoras', DocenteController::class);
 
-Route::resource('/docentes', DocenteController::class);
+
+
 
 

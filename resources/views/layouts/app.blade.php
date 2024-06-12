@@ -1,48 +1,45 @@
-<html>
-
+<!-- resources/views/layouts/app.blade.php -->
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Academia - @yield('titulo')</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@yield('title', 'EasySoat')</title>
+    <!-- Agrega aquí tus estilos CSS y otros recursos  -->
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </head>
-
 <body>
-    <div class='container'>
-        <nav class="navbar navbar-expand-lg bg-primary">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">RADSOFT[{}]</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/cursos">Mis Cursos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/docentes">Docentes</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Estudiantes</a>
-                        </li>
+    <header class="header">
 
-                    </ul>
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button type="button" class="btn btn-success">Buscar</button>
-                    </form>
-                </div>
+        <nav class="nav">
+            <a href="/" class="logo nav-link">
+                <img src="{{ asset('img/LOGO BLANCO.png') }}" alt="Descripción de la imagen">
+
+            </a>
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-menu-item"><a href="/" class="nav-menu-link nav-link">Consulta tu soat</a></li>
+                <li class="nav-menu-item"><a href="/aseguradoras/create" class="nav-menu-link nav-link convenios" id="convenios">Convenios</a></li>
+                <li class="nav-menu-item"><a href="/registros/login" class="nav-menu-link nav-link">Login</a></li>
+                <li class="nav-menu-item"><a href="/registros/create" class="nav-menu-link nav-link">Registrate</a></li>
+
+            </ul>
+            <div class="nav-toggle" aria-label="Abrir menu" id="open">
+                <span>&#9776;</span>
             </div>
         </nav>
+    </header>
 
-        @yield('contenido')
-    </div>
-
-
-
+    <main>
+        @yield('content')
+    </main>
+    <footer class="footer">
+        <div class="marca-logo">
+            <h1>{R} RadSoft</h1>
+        </div>
+        <p>Desarrollamos tu software a tu medida</p>
+        <p>&copy; {{ date('Y') }} EasySoat. Todos los derechos reservados.</p>
+    </footer>
 
 </body>
-
 </html>

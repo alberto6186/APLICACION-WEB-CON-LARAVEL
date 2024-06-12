@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('cursos', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('nombre', 100);
-            $table->string('descripcion', 200);
-            $table->string('imagen');
+            $table->string('nombre', 60);
+            $table->string('apellidos', 60);
+            $table->string('email', 100);
+            $table->string('password', 100);
         });
     }
 

@@ -13,7 +13,7 @@ class DocenteController extends Controller
     public function index()
     {
         $teacher = Docente::all();
-        return view('docentes.index', compact('teacher'));
+        return view('aseguradoras.index', compact('teacher'));
     }
 
     /**
@@ -21,7 +21,7 @@ class DocenteController extends Controller
      */
     public function create()
     {
-        return view('docentes.create');
+        return view('aseguradoras.create');
     }
 
     /**
@@ -42,7 +42,8 @@ class DocenteController extends Controller
         }
 
         $teacher->save();
-        return 'Se creo el instructor con exito';
+        return redirect()->route('aseguradoras.index')->with('status', 'create');
+
     }
 
     /**
@@ -51,7 +52,7 @@ class DocenteController extends Controller
     public function show(string $id)
     {
         $teacher = Docente::find($id);
-        return view('docentes.show', compact('teacher'));
+        return view('aseguradoras.show', compact('teacher'));
     }
 
     /**
@@ -60,7 +61,8 @@ class DocenteController extends Controller
     public function edit(string $id)
     {
         $teacher = Docente::find($id);
-        return view('docentes.edit',compact('teacher'));
+
+        return view('aseguradoras.edit',compact('teacher'));
     }
 
     /**
@@ -72,9 +74,11 @@ class DocenteController extends Controller
         $teacher->fill($request->except('imagen'));
         if ($request->hasFile('imagen')){ //si desde ese campo viene un archivo hacer:
             $teacher->imagen = $request->file('imagen')->store('public/imagenes');
-            $teacher->save();
-            return 'Docente actualizado';
+
         }
+        $teacher->save();
+        return redirect()->route('aseguradoras.index')->with('status', 'update');
+
     }
 
     /**
@@ -82,6 +86,10 @@ class DocenteController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+
+        $teacher = Docente::findOrFail($id);
+        $teacher->delete();
+        return redirect()->route('aseguradoras.index')->with('status', 'deleted');
+
     }
 }
