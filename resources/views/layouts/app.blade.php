@@ -22,7 +22,8 @@
                 <li class="nav-menu-item"><a href="/aseguradoras/create" class="nav-menu-link nav-link convenios" id="convenios">Convenios</a></li>
                 <li class="nav-menu-item"><a href="/registros/login" class="nav-menu-link nav-link">Login</a></li>
                 <li class="nav-menu-item"><a href="/registros/create" class="nav-menu-link nav-link">Registrate</a></li>
-
+                <li class="nav-menu-item"><a href="/soat" class="nav-menu-link nav-link">Edit</a></li>
+                <li class="nav-menu-item"><a href="/soat/create" class="nav-menu-link nav-link">Alis</a></li>
             </ul>
             <div class="nav-toggle" aria-label="Abrir menu" id="open">
                 <span>&#9776;</span>

@@ -15,7 +15,7 @@
         </div>
         <div class="consulta">
             <h2>Consulta tu Soat</h2>
-            <form action="{{ route('soat.create') }}" method="GET" class="formulario" id="consultaForm">
+            <form action="{{ route('soat.show', ['soat' => 'PLACEHOLDER']) }}" method="GET" class="formulario" id="consultaForm">
                 @csrf
                 <div class="form-campo">
                     <input type="text" name="placa" id="placa" placeholder="Placa" class="input" required>
@@ -34,7 +34,6 @@
 </section>
 @endsection
 
-@section('scripts')
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         var consultaForm = document.getElementById("consultaForm");
@@ -64,12 +63,18 @@
             // Si alguna validación falla, evitar el envío del formulario
             if (!valid) {
                 event.preventDefault();
+                return;
             }
+
+            // Actualizar la acción del formulario con los parámetros
+            var actionUrl = "{{ route('soat.show', ['soat' => '__REPLACE__']) }}";
+            actionUrl = actionUrl.replace('__REPLACE__', placa); // Aquí puedes ajustar según el identificador necesario
+            consultaForm.action = actionUrl;
         });
 
         // Función para validar el formato de la placa
         function validarPlaca(placa) {
-            var regexPlaca = /^[A-Z]{3}\d{2}[A-Z]$/;
+            var regexPlaca = /^[A-Z]{3}\d{3}$/;
             return regexPlaca.test(placa);
         }
 
@@ -85,7 +90,7 @@
             errorSpan.textContent = mensaje;
             errorSpan.style.display = "block";
             setTimeout(function() {
-                ocultarError(id);
+                errorSpan.style.display = "none";
             }, 5000);
         }
 
@@ -97,5 +102,4 @@
         }
     });
 </script>
-
 

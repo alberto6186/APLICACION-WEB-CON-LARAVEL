@@ -34,4 +34,3 @@
         <p class="no-registrado">Ya tienes una cuenta?   <li > <a href="/registros/login">Inicia session aqui</a></li></p>
     </div>
 @endsection
-

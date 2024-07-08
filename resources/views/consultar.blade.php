@@ -1,47 +1,47 @@
-<!-- resources/views/home.blade.php -->
+<!-- resources/views/consultar.blade.php -->
+
 @extends('layouts.app')
 
 @section('title', 'Consulta SOAT')
 
 @section('content')
-<section class="section">
-    <h1>Adquiere tu Soat y aprovecha todos los beneficios que tenemos para ti</h1>
-    <div class="secciones">
-        <div class="contenido-imagen">
-            <h2>Compra tu Soat con nosotros</h2>
-            <div class="imagen">
-                <img src="{{ asset('img/auto.png') }}" alt="Descripción de la imagen">
+    <section class="section">
+        <h1>Adquiere tu Soat y aprovecha todos los beneficios que tenemos para ti</h1>
+        <div class="secciones">
+            <div class="contenido-imagen">
+                <h2>Compra tu Soat con nosotros</h2>
+                <div class="imagen">
+                    <img src="{{ asset('img/auto.png') }}" alt="Descripción de la imagen">
+                </div>
+            </div>
+            <div class="consulta">
+                <h2>Consulta tu Soat</h2>
+                <form action="{{ route('consultar.soat') }}" method="POST" class="formulario" id="consultaForm">
+                    @csrf
+                    <div class="form-campo">
+                        <input type="text" name="placa" id="placa" placeholder="Placa" class="input" required>
+                        <span id="errorPlaca" class="error" style="color: red; background-color: white; display: none;"></span>
+                    </div>
+                    <div class="form-campo">
+                        <input type="number" name="identificacion" id="identificacion" placeholder="Identificación" class="input" required>
+                        <span id="errorIdentificacion" class="error" style="color: red; background-color: white; display: none;"></span>
+                    </div>
+                    <div class="form-campo">
+                        <input type="submit" value="Consultar" class="boton-registrarse">
+                    </div>
+                </form>
             </div>
         </div>
-        <div class="consulta">
-            <h2>Consulta tu Soat</h2>
-            <form action="{{ route('soat.create') }}" method="GET" class="formulario" id="consultaForm">
-                @csrf
-                <div class="form-campo">
-                    <input type="text" name="placa" id="placa" placeholder="Placa" class="input" required>
-                    <span id="errorPlaca" class="error" style="color: red; background-color: white; display: none;"></span>
-                </div>
-                <div class="form-campo">
-                    <input type="number" name="numero_identificacion" id="numero_identificacion" placeholder="Identificación" class="input" required>
-                    <span id="errorIdentificacion" class="error" style="color: red; background-color: white; display: none;"></span>
-                </div>
-                <div class="form-campo">
-                    <input type="submit" value="Consultar" class="boton-registrarse">
-                </div>
-            </form>
-        </div>
-    </div>
-</section>
+    </section>
 @endsection
 
-@section('scripts')
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         var consultaForm = document.getElementById("consultaForm");
 
         consultaForm.addEventListener('submit', function(event) {
             var placa = document.getElementById("placa").value.trim().toUpperCase(); // Convertir a mayúsculas
-            var identificacion = document.getElementById("numero_identificacion").value.trim();
+            var identificacion = document.getElementById("identificacion").value.trim();
 
             var valid = true;
 
@@ -85,7 +85,7 @@
             errorSpan.textContent = mensaje;
             errorSpan.style.display = "block";
             setTimeout(function() {
-                ocultarError(id);
+                errorSpan.style.display = "none";
             }, 5000);
         }
 
@@ -97,5 +97,3 @@
         }
     });
 </script>
-
-
